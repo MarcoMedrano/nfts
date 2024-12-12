@@ -1,0 +1,44 @@
+﻿@using NftSample.Infraestructure.Api
+<MudDialog Style="width: 300px">
+    <TitleContent>
+        Creating your NFT
+    </TitleContent>
+    <DialogContent>
+        <MudStack AlignItems="AlignItems.Center">
+            <MudImage Src=@Nft.IpfsImage></MudImage>
+            <MudDivider/>
+            <br/>
+            <MudTextField T=@string @bind-Value=@Nft.Name Variant=@Variant.Text Label="Name" Required=@true/>
+            <MudTextField T=@string @bind-Value=@Nft.IpfsImage Variant=@Variant.Text Label="Picture Url" Required=@true FullWidth="true"/>
+            <br/>
+        </MudStack>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary" OnClick=@Save>Save</MudButton>
+        <MudButton Color="Color.Primary" OnClick=@Cancel>Cancel</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    [CascadingParameter]
+    UserState UserState { get; set; }
+
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; }
+
+    [Inject]
+    INftsController Api { get; set; }
+
+    private NftCreateDto Nft { get; set; } = new();
+
+    private async Task Save()
+    {
+        await Api.Add(Nft);
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+    private async Task Cancel()
+    {
+        MudDialog.Cancel();
+    }
+}

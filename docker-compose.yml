@@ -1,0 +1,29 @@
+version: "3.9"
+
+x-secrets:
+  dbPassword: &dbPassword Shared#1234
+
+services:
+
+  web:
+      build: .
+      ports:
+        - "8080:8080"
+        - "8081:8081"
+      restart: on-failure
+
+  sql:
+    hostname: sql
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    user: root
+    environment: 
+      ACCEPT_EULA: Y
+      SA_PASSWORD: *dbPassword
+    ports:
+      - 1433:1433
+    # volumes:
+      # - ./dbs/mssql:/var/opt/mssql/data
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-U", "sa", "-P", *dbPassword, "-Q", "select 1"]
+      interval: 10s
+      retries: 3

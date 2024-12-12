@@ -1,0 +1,13 @@
+﻿@page "/"
+@using NftSample.Infraestructure.Api
+
+All of the art, here
+<NftGallery Nfts=@Nfts></NftGallery>
+
+@code
+{
+    IEnumerable<NftDto> Nfts;
+    [Inject] INftsController Api { get; set; }
+
+    protected override async Task OnInitializedAsync() => Nfts = await Api.Get();
+}

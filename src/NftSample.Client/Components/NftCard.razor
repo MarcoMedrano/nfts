@@ -1,0 +1,13 @@
+﻿@using NftSample.Dtos.Nft
+<MudCard>
+    <MudCardMedia Image=@Nft.IpfsImage />
+    <MudCardContent>
+        <MudText Typo="Typo.h5">@Nft.Name</MudText>
+    </MudCardContent>
+
+</MudCard>
+
+@code
+{
+    [Parameter] public NftDto Nft { get; set; }
+}

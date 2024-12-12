@@ -1,0 +1,29 @@
+<MudAvatar Color="Color.Warning" Variant="Variant.Outlined">
+    @if (MetamaskAvailable)
+    {
+        <AuthorizeView Roles=@Roles.WalletAuthenticated>
+            <Authorized>
+                <MudImage Src="images/metamask.svg" Alt="Connected" Class="pa-1" @onclick="@LoginToServer"/>
+            </Authorized>
+            <NotAuthorized>
+                @if (authorizingInProgress)
+                {
+                    <lottie-player src="images/metamask.json" background="transparent" speed="0.7"
+                                   style="width: 32px; height: 32px;" loop autoplay>
+                    </lottie-player>
+                }
+                else
+                {
+                    <MudImage Src="images/metamask-disabled.svg" Alt="Connect" Class="pa-1"
+                              @onclick="@LoginWithMetaMask"/>
+                }
+            </NotAuthorized>
+        </AuthorizeView>
+    }
+    else
+    {
+        <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn" target="_blank">
+            <MudImage Src="images/metamask-disabled.svg" Alt="Install Metamask" Width=32 Height=32 />
+        </a>
+    }
+</MudAvatar>

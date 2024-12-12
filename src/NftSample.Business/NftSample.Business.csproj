@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NftSample.Dal\NftSample.Dal.csproj" />
+    <ProjectReference Include="..\NftSample.Dtos\NftSample.Dtos.csproj" />
+    <ProjectReference Include="..\NftSample.Entities\NftSample.Entities.csproj" />
+    <ProjectReference Include="..\NftSample.Application\NftSample.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Users/Events/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
+  </ItemGroup>
+
+</Project>

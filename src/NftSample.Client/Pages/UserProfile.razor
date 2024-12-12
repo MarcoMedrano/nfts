@@ -1,0 +1,79 @@
+﻿@page "/user"
+@using NftSample.Infraestructure.Api
+@using System.Data
+
+
+<PageTitle>User Profile</PageTitle>
+
+<AuthorizeView Roles=@Roles.ServerAuthenticated>
+    <Authorized>
+        <MudStack AlignItems="AlignItems.Center">
+            <MudAvatar Style="height:128px; width:128px;">
+                <MudImage Src=@User.ProfilePicture></MudImage>
+            </MudAvatar>
+            <MudText Typo="Typo.caption">@User.Id</MudText>
+            <MudDivider/>
+            <br/>
+            <MudTextField T=@string @bind-Value=@User.Nickname Variant=@Variant.Text Label="Nickname" ReadOnly=@(!Edit) Required=@true/>
+            <MudTextField T=@string @bind-Value=@User.ProfilePicture Variant=@Variant.Text Label="Profile Picture Url" ReadOnly=@(!Edit) Required=@true/>
+            <MudDivider/>
+            <MudButton OnClick=@Save>Save</MudButton>
+        </MudStack>
+        <NftGallery Nfts=@Nfts></NftGallery>
+        <MudFab StartIcon="@Icons.Material.Filled.Add" Size="Size.Medium" Class="fab" Color="Color.Primary" OnClick=@CreateNft />
+    </Authorized>
+    <NotAuthorized>
+        Please login using Metamask Icon.
+    </NotAuthorized>
+</AuthorizeView>
+
+<style>
+    .fab {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    }
+</style>
+
+@code {
+
+    [Parameter]
+    public bool Edit { get; set; } = true;
+
+    [CascadingParameter] UserState UserState { get; set; }
+
+    [Inject] ISnackbar Snackbar {get;set;}
+
+    [Inject] IDialogService DialogService { get; set; }
+    [Inject] SiweAuthenticationStateProvider AuthState { get; set; }
+    [Inject] IUsersController UserApi { get; set; }
+
+    UserDto User => UserState.User;
+    IEnumerable<NftDto> Nfts;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if(string.IsNullOrEmpty(User.Id)) return;
+        if(!await AuthState.IsServerAuthenticated()) return;
+        if(string.IsNullOrEmpty(User.ProfilePicture)) User.ProfilePicture = "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/approved-profile-icon.png";
+
+        Nfts = await UserApi.GetNfts(User.Id, CancellationToken.None);
+
+        base.OnParametersSetAsync();
+    }
+
+    private async Task Save()
+    {
+        await UserApi.Update(User);
+        Snackbar.Add("Saved!", Severity.Success);
+    }
+
+    private async Task CreateNft()
+    {
+        var result = await DialogService.Show<NftCreateDialog>().Result;
+
+        if(result.Canceled) return;
+        Nfts = await UserApi.GetNfts(User.Id, CancellationToken.None);
+        StateHasChanged();
+    }
+}
