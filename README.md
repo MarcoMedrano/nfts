@@ -28,3 +28,12 @@ docker compose up --build
 And open http://localhost:8080
 
 Swagger at http://localhost:8080/swagger
+
+### About the Vue.js view
+I have no experience with Vue, that little gallery was my hello world for me, so I am far from being an expert on it, but eager to learn!
+At this very moment it is not deployed with Docker, so please to run it:
+```shell
+cd src/NftSample.VueClient
+npm install
+npm run dev
+```
