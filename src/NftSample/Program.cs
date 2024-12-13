@@ -35,6 +35,7 @@ else
     app.UseHsts();
 }
 
+app.UseCors(o => o.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();

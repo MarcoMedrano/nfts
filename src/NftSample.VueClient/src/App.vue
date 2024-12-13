@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Gallery from './components/Gallery.vue';
+import Gallery from './components/Gallery2.vue';
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 </script>
