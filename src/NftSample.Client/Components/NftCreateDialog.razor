@@ -5,7 +5,7 @@
     </TitleContent>
     <DialogContent>
         <MudStack AlignItems="AlignItems.Center">
-            <MudImage Src=@Nft.IpfsImage></MudImage>
+            <MudImage Src=@Nft.IpfsImage Height=200 />
             <MudDivider/>
             <br/>
             <MudTextField T=@string @bind-Value=@Nft.Name Variant=@Variant.Text Label="Name" Required=@true/>

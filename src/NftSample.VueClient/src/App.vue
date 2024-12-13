@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Gallery from './components/Gallery2.vue';
+import Gallery from './components/Gallery.vue';
 import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+
 </script>
 
 <template>
@@ -9,12 +9,11 @@ import TheWelcome from './components/TheWelcome.vue'
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="Nft Gallery!" />
+      <HelloWorld msg="The vue NFT gallery!" />
     </div>
   </header>
 
   <main>
-    <!-- <TheWelcome /> -->
      <Gallery />
   </main>
 </template>

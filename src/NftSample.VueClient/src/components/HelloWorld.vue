@@ -8,8 +8,8 @@ defineProps<{
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
     <h3>
-      Signin using MetaMask at
-      <a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a>
+      Signin to add your own NFTs at
+      <a href="http://localhost:8080/user" target="_blank" rel="noopener">http://localhost:8080/user</a>
     </h3>
   </div>
 </template>
