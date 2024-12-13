@@ -19,8 +19,11 @@ public class AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration
         );
 
         this.Nfts.AddRange(
-            new Nft { Name = "Nik", IpfsImage = "/images/ChillBam.PNG" },
-            new Nft { Name = "Guns N'cats", IpfsImage = "/images/XenithGuardian.PNG" }
+            new Nft { Name = "Bam", IpfsImage = "http://localhost:8080/images/ChillBam.PNG" },
+            new Nft { Name = "MellowFawn", IpfsImage = "http://localhost:8080/images/MellowFawn.PNG" },
+            new Nft { Name = "Tranqx", IpfsImage = "http://localhost:8080/images/Tranqx.PNG" },
+            new Nft { Name = "Xenit", IpfsImage = "http://localhost:8080/images/XenithGuardian.PNG" },
+            new Nft { Name = "ZenDeer", IpfsImage = "http://localhost:8080/images/ZenDeer.PNG" }
         );
 
         this.SaveChanges();

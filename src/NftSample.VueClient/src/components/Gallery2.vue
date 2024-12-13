@@ -1,17 +1,4 @@
-<template>
-    <div>
-      <Carousel>
-        <Slide v-for="nft in nfts" :key="nft.id">
-          <div class="nft-item">
-            <h3>{{ nft.name }}</h3>
-            <img :src="nft.ipfsImage" :alt="nft.name" />
-          </div>
-        </Slide>
-      </Carousel>
-    </div>
-  </template>
-  
-  <script lang="ts">
+<script lang="ts">
   import 'vue3-carousel/dist/carousel.css'
   import { defineComponent, ref, onMounted } from 'vue';
   import { Carousel, Slide } from 'vue3-carousel';
@@ -52,6 +39,19 @@
   });
   </script>
   
+  <template>
+    <div>
+      <Carousel :items-to-show=2.5 :gap=10 :wrap-around=true :transition=500>
+        <Slide v-for="nft in nfts" :key="nft.id">
+          <div class="nft-item">
+            <h3>{{ nft.name }}</h3>
+            <img :src="nft.ipfsImage" :alt="nft.name" />
+          </div>
+        </Slide>
+      </Carousel>
+    </div>
+  </template>
+
   <style scoped>
   .nft-item {
     text-align: center;
@@ -59,7 +59,7 @@
   }
   img {
     max-width: 100%;
-    height: 100px;
+    height:auto;
     display: block;
     margin: 0 auto;
   }
